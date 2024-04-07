@@ -1,5 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import App from './components/app';
+
+const Settings = {
+  cardsNumber: 312
+} as const;
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -7,6 +12,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <h1>Hello, World!</h1>
+    <App cardsNumber = {Settings.cardsNumber}/>
   </React.StrictMode>
 );
+
+export default Settings;
