@@ -1,4 +1,4 @@
-function FavouritesEmptyPage(): JSX.Element {
+function FavoritesEmptyPage(): JSX.Element {
   return (
     <div className="page page--favorites-empty">
       <header className="header">
@@ -50,4 +50,4 @@ function FavouritesEmptyPage(): JSX.Element {
   );
 }
 
-export default FavouritesEmptyPage;
+export default FavoritesEmptyPage;
