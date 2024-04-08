@@ -1,19 +1,23 @@
-import PlaceCard from '../../components/place-card';
+import { Link } from 'react-router-dom';
+import CardsList from '../../components/cards-list';
+import { Offer } from '../../types/offer';
+
 
 type MainPageProps = {
     cardsNumber: number;
+    offers: Offer[];
 };
 
-function MainPage({cardsNumber}: MainPageProps): JSX.Element {
+function MainPage({cardsNumber, offers}: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link header__logo-link--active">
+              <Link to='/' className="header__logo-link header__logo-link--active">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -22,7 +26,9 @@ function MainPage({cardsNumber}: MainPageProps): JSX.Element {
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
+                    <Link to='/favorites'>
+                      <span className="header__favorite-count">3</span>
+                    </Link>
                   </a>
                 </li>
                 <li className="header__nav-item">
@@ -94,11 +100,7 @@ function MainPage({cardsNumber}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content"></div>
-              <PlaceCard/>
-              <PlaceCard/>
-              <PlaceCard/>
-              <PlaceCard/>
+              < CardsList citiesCards={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

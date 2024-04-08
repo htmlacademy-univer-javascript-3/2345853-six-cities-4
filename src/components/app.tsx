@@ -7,38 +7,34 @@ import NotFoundPage from '../pages/not-found-page/not-found-page';
 import AppRoute from './constants/app-link-const';
 import PrivateRoute from './private-route';
 import AuthStatus from './constants/auth-const';
+import { Offer } from '../types/offer';
 
 
 type AppPageProps = {
   cardsNumber: number;
+  offers: Offer[];
 };
 
-function App({cardsNumber}:AppPageProps): JSX.Element {
+
+function App({cardsNumber, offers}: AppPageProps): JSX.Element {
+  const favorites = offers.filter((o) => o.isFavorite);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<MainPage cardsNumber = {cardsNumber}/>}/>
-      </Routes>
+        <Route path={AppRoute.Main} element={<MainPage cardsNumber = {cardsNumber} offers = {offers}/>}/>
 
-      <Routes>
         <Route path={AppRoute.Login} element={<LoginPage/>}/>
-      </Routes>
 
-      <Routes>
         <Route path={AppRoute.Favorites}
           element={
-            <PrivateRoute authStatus={AuthStatus.NotAuth}>
-              <FavoritesPage/>
+            <PrivateRoute authStatus={AuthStatus.Auth}>
+              <FavoritesPage favorites={favorites}/>
             </PrivateRoute>
           }
         />
-      </Routes>
 
-      <Routes>
         <Route path={AppRoute.Offer} element={<OfferPage/>}/>
-      </Routes>
 
-      <Routes>
         <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
 
