@@ -4,7 +4,7 @@ import { Offer } from '../../types/offer';
 import CityMap from '../../components/cityMap';
 import { useAppSelector } from '../../components/hooks/index.ts';
 import {useEffect, useState} from 'react';
-import CitiesList from '../../components/cities-list.tsx';
+import CitiesList from '../../components/CitiesListProps.tsx';
 import { Cities } from '../../components/constants/cities.tsx';
 import { sortTypes } from '../../components/constants/all-constants.tsx';
 import useSort from '../../components/hooks/useSort.ts';
