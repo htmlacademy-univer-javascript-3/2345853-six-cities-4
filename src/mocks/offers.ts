@@ -24,7 +24,8 @@ export const offers: Offer[] = [
       'photo':'img/avatar-angelina.jpg',
       'name': 'Angelina',
       'isPro': true
-    }
+    },
+    'nearPlaces': []
   },
 
   {
@@ -50,7 +51,8 @@ export const offers: Offer[] = [
       'photo':'img/avatar-angelina.jpg',
       'name': 'Angelina',
       'isPro': true
-    }
+    },
+    'nearPlaces': []
   },
 
 
@@ -77,7 +79,8 @@ export const offers: Offer[] = [
       'photo':'img/avatar-angelina.jpg',
       'name': 'Angelina',
       'isPro': true
-    }
+    },
+    'nearPlaces': []
   },
 
 
@@ -104,6 +107,12 @@ export const offers: Offer[] = [
       'photo':'img/avatar-angelina.jpg',
       'name': 'Angelina',
       'isPro': true
-    }
+    },
+    'nearPlaces': []
   },
 ];
+
+offers[0].nearPlaces = [offers[1], offers[2], offers[3]];
+offers[1].nearPlaces = [offers[0], offers[2], offers[3]];
+offers[2].nearPlaces = [offers[1], offers[0], offers[3]];
+offers[3].nearPlaces = [offers[1], offers[2], offers[0]];

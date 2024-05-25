@@ -1,7 +1,8 @@
 import {Icon, Marker, layerGroup} from 'leaflet';
-import { Offer } from '../types/offer';
+import { Offers } from '../types/offer';
 import { City } from '../types/city';
 
+import 'leaflet/dist/leaflet.css';
 import {useRef, useEffect} from 'react';
 import useMap from './hooks/useMap';
 import { URL_MARKER_DEFAULT } from './constants/all-constants';
@@ -9,7 +10,7 @@ import { URL_MARKER_DEFAULT } from './constants/all-constants';
 
 type CityMapProp = {
   city: City;
-  points: Offer[];
+  points: Offers;
 }
 
 const defaultCustomIcon = new Icon({
@@ -26,26 +27,21 @@ function CityMap({city, points}: CityMapProp): JSX.Element {
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
-      points.forEach((point) => {
-        const marker = new Marker({
-          lat: point.city.point.latitude,
-          lng: point.city.point.longitude,
+      points.map((e) => e.city.point)
+        .forEach((point) => {
+          const marker = new Marker({
+            lat: point.latitude,
+            lng: point.longitude,
+          });
+          marker.setIcon(defaultCustomIcon).addTo(markerLayer);
         });
-        marker.setIcon(defaultCustomIcon).addTo(markerLayer);
-      });
       return () => {
         map.removeLayer(markerLayer);
       };
     }
   }, [map, points]);
 
-  return (
-    <div
-      style={{height: '100%'}}
-      ref={mapRef}
-    >
-    </div>
-  );
+  return <div style={{height: '100%'}} ref={mapRef}></div>;
 }
 
 export default CityMap;

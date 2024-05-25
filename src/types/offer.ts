@@ -1,5 +1,5 @@
 import { City } from './city';
-
+import { Author } from './review';
 
 export type Offer = {
     'id': string;
@@ -14,18 +14,8 @@ export type Offer = {
     'numOfGuests': number;
     'price': number;
     'masterInf': Author;
+    'nearPlaces': Offers;
 };
 
-export type Author = {
-    'photo': string;
-    'name': string;
-    'isPro': boolean;
-};
+export type Offers = Offer[]
 
-export type Review = {
-    id: string;
-    date: string;
-    user: Author;
-    comment: string;
-    rating: number;
-  }
