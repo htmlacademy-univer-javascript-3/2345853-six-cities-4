@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import CardsList from '../../components/cards-list';
 import { Offer } from '../../types/offer';
+import CityMap from '../../components/cityMap';
 
 
 type MainPageProps = {
@@ -15,7 +16,7 @@ function MainPage({cardsNumber, offers}: MainPageProps): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link to='/' className="header__logo-link header__logo-link--active">
+              <Link to="/" className="header__logo-link header__logo-link--active">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>
@@ -26,7 +27,7 @@ function MainPage({cardsNumber, offers}: MainPageProps): JSX.Element {
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <Link to='/favorites'>
+                    <Link to="/favorites">
                       <span className="header__favorite-count">3</span>
                     </Link>
                   </a>
@@ -100,10 +101,12 @@ function MainPage({cardsNumber, offers}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              < CardsList citiesCards={offers} />
+              <CardsList citiesCards={offers}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <CityMap city={offers[0].city} points={offers}/>
+              </section>
             </div>
           </div>
         </div>

@@ -1,23 +1,21 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainPage from '../pages/main-page/main-page';
 import LoginPage from '../pages/login-page/login-page';
-import FavoritesPage from '../pages/favorites-page/favorites-page';
+import FavouritesPage from '../pages/favourites-page/favourites-page';
 import OfferPage from '../pages/offer-page/offer-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
-import AppRoute from './constants/app-link-const';
+import { AppRoute, AuthStatus } from './constants/all-constants';
 import PrivateRoute from './private-route';
-import AuthStatus from './constants/auth-const';
 import { Offer } from '../types/offer';
-
 
 type AppPageProps = {
   cardsNumber: number;
   offers: Offer[];
 };
 
-
 function App({cardsNumber, offers}: AppPageProps): JSX.Element {
   const favorites = offers.filter((o) => o.isFavorite);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -28,7 +26,7 @@ function App({cardsNumber, offers}: AppPageProps): JSX.Element {
         <Route path={AppRoute.Favorites}
           element={
             <PrivateRoute authStatus={AuthStatus.Auth}>
-              <FavoritesPage favorites={favorites}/>
+              <FavouritesPage favorites={favorites}/>
             </PrivateRoute>
           }
         />
