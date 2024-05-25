@@ -6,7 +6,7 @@ type FavoritesPageProp = {
   favorites: Offer[];
 };
 
-function FavoritesPage({favorites}: FavoritesPageProp): JSX.Element {
+function FavouritesPage({favorites}: FavoritesPageProp): JSX.Element {
   const favoritesMap = favorites.reduce(
     (cityMap: Record<string, Offer[]>, place: Offer) => {
       const city = place.city.name;
@@ -82,4 +82,4 @@ function FavoritesPage({favorites}: FavoritesPageProp): JSX.Element {
   );
 }
 
-export default FavoritesPage;
+export default FavouritesPage;

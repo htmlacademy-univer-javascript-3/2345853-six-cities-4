@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 type Rating = {
   rating: string;
@@ -11,17 +11,17 @@ function CommentSubmissionForm() {
     comment: '',
   });
 
-  const handleCommentChange = (e: SyntheticEvent<HTMLTextAreaElement>) => {
-    setFormState((PrevState) => ({
-      ...PrevState,
-      comment: e.currentTarget.value,
+  const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setFormState((prevState) => ({
+      ...prevState,
+      comment: e.target.value,
     }));
   };
 
-  const handleRatingChange = (e: SyntheticEvent<HTMLInputElement>) => {
+  const handleRatingChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormState((prevState) => ({
       ...prevState,
-      rating: e.currentTarget.value,
+      rating: e.target.value,
     }));
 
   };

@@ -180,7 +180,7 @@ function OfferPage(): JSX.Element {
                   </div>
                 </li>
               </ul>
-              <CommentSubmissionForm/>
+              <CommentSubmissionForm />
             </section>
           </div>
         </div>

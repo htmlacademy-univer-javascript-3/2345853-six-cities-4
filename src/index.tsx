@@ -2,10 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app';
 import { offers } from './mocks/offers';
-
-const Settings = {
-  cardsNumber: 312
-} as const;
+import { Settings } from './components/constants/all-constants';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
