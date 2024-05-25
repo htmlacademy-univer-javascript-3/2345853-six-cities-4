@@ -8,20 +8,24 @@ import { AppRoute, AuthStatus } from './constants/all-constants';
 import PrivateRoute from './private-route';
 import { Offer } from '../types/offer';
 import { Review } from '../types/review';
+import { useAppDispatch, useAppSelector } from './hooks/index.ts';
+import { listFilling } from '../action.ts';
 
 type AppPageProps = {
-  cardsNumber: number;
-  offers: Offer[];
   reviews: Review[];
 };
 
-function App({cardsNumber, offers, reviews}: AppPageProps): JSX.Element {
+function App({reviews}: AppPageProps): JSX.Element {
+  const offers: Offer[] = useAppSelector((state) => state.offers);
+  const dispatch = useAppDispatch();
+  dispatch(listFilling());
+
   const favorites = offers.filter((o) => o.isFavorite);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<MainPage cardsNumber = {cardsNumber} offers = {offers}/>}/>
+        <Route path={AppRoute.Main} element={<MainPage favorites = {favorites}/>}/>
 
         <Route path={AppRoute.Login} element={<LoginPage/>}/>
 

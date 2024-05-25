@@ -4,9 +4,8 @@ import { getRating } from './constants/all-constants';
 
 type PlaceCardProp = {
   offerInfo: Offer;
-  searchType: 'regular' | 'near';
 }
-function PlaceCard({offerInfo, searchType}: PlaceCardProp): JSX.Element {
+function PlaceCard({offerInfo}: PlaceCardProp): JSX.Element {
   const {
     id,
     previewImage,
@@ -23,10 +22,7 @@ function PlaceCard({offerInfo, searchType}: PlaceCardProp): JSX.Element {
   } = offerInfo;
 
   return (
-    <article className={`${searchType === 'regular'
-      ? 'cities__card'
-      : 'near-places__card'} place-card`}
-    >
+    <article className={'cities__card'}>
       {isPremium && (
         <div className="place-card__mark">
           <span>{'Premium'}</span>
