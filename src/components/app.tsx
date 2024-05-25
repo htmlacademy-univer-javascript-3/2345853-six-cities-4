@@ -7,13 +7,15 @@ import NotFoundPage from '../pages/not-found-page/not-found-page';
 import { AppRoute, AuthStatus } from './constants/all-constants';
 import PrivateRoute from './private-route';
 import { Offer } from '../types/offer';
+import { Review } from '../types/review';
 
 type AppPageProps = {
   cardsNumber: number;
   offers: Offer[];
+  reviews: Review[];
 };
 
-function App({cardsNumber, offers}: AppPageProps): JSX.Element {
+function App({cardsNumber, offers, reviews}: AppPageProps): JSX.Element {
   const favorites = offers.filter((o) => o.isFavorite);
 
   return (
@@ -31,9 +33,9 @@ function App({cardsNumber, offers}: AppPageProps): JSX.Element {
           }
         />
 
-        <Route path={AppRoute.Offer} element={<OfferPage/>}/>
+        <Route path={AppRoute.Offer} element={<OfferPage reviews={reviews} offers={offers}/>}/>
 
-        <Route path="*" element={<NotFoundPage/>}/>
+        <Route path={AppRoute.NotFound} element={<NotFoundPage/>}/>
       </Routes>
 
     </BrowserRouter>
