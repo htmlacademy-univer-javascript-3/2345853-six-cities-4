@@ -2,14 +2,28 @@ import { Link } from 'react-router-dom';
 import CardsList from '../../components/cards-list';
 import { Offer } from '../../types/offer';
 import CityMap from '../../components/cityMap';
+import { useAppSelector } from '../../components/hooks/index.ts';
+import {useEffect, useState} from 'react';
+import CitiesList from '../../components/cities-list.tsx';
+import { Cities } from '../../components/constants/cities.tsx';
 
 
 type MainPageProps = {
-    cardsNumber: number;
-    offers: Offer[];
+    favorites: Offer[];
 };
 
-function MainPage({cardsNumber, offers}: MainPageProps): JSX.Element {
+function MainPage({favorites}: MainPageProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+
+  const [curCityOffers, setCurCityOffers] = useState<Offer[]>(offers);
+
+
+  const city = useAppSelector((state) => state.city);
+  useEffect(() => {
+    const filteredOffers = offers.filter((offer) => offer.city.name === city);
+    setCurCityOffers(filteredOffers);
+  }, [city, offers]);
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -28,7 +42,7 @@ function MainPage({cardsNumber, offers}: MainPageProps): JSX.Element {
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <Link to="/favorites">
-                      <span className="header__favorite-count">3</span>
+                      <span className="header__favorite-count">{favorites.length}</span>
                     </Link>
                   </a>
                 </li>
@@ -47,45 +61,14 @@ function MainPage({cardsNumber, offers}: MainPageProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CitiesList cities={Cities}/>
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cardsNumber} places to stay in Amsterdam</b>
+              <b className="places__found">{`${curCityOffers.length} places to stay in ${city}`}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -101,11 +84,11 @@ function MainPage({cardsNumber, offers}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardsList citiesCards={offers} searchType='regular'/>
+              <CardsList citiesCards={curCityOffers}/>
             </section>
             <div className="cities__right-section">
               <section className='cities__map map'>
-                <CityMap city={offers[0].city} points={offers}/>
+                <CityMap city={curCityOffers.length > 0 ? curCityOffers[0].city : offers[0].city} points={curCityOffers}/>
               </section>
             </div>
           </div>
