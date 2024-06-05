@@ -15,8 +15,8 @@ test.describe('Добавление в избранное', () => {
       await page.waitForSelector('.cities__card');
       await page.getByText('Sign in').click();
 
-      await page.fill('input[name="email"]', 'eri.shageeva@yandex.ru');
-      await page.fill('input[name="password"]', 'a5');
+      await page.fill('input[name="email"]', 'ericson@yandex.ru');
+      await page.fill('input[name="password"]', 'e1');
       await page.click('button[type="submit"]');
 
       const cardElement = page.locator('.cities').first();
@@ -44,8 +44,8 @@ test.describe('Добавление в избранное', () => {
       await page.waitForSelector('.cities__card');
       await page.getByText('Sign in').click();
 
-      await page.fill('input[name="email"]', 'ericspersonic@yandex.ru');
-      await page.fill('input[name="password"]', 'M5');
+      await page.fill('input[name="email"]', 'erisha@yandex.ru');
+      await page.fill('input[name="password"]', 'e2');
       await page.click('button[type="submit"]');
 
       const cardElementDel = page.locator('.cities').first();
